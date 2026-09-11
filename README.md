@@ -1,1 +1,304 @@
-# dj866ts48h-we.github.io
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLASST</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #d84fb5;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    /* LOGO */
+
+    .logo {
+      color: white;
+      font-size: clamp(65px, 19vw, 150px);
+      font-weight: 900;
+      letter-spacing: -5px;
+      line-height: 1;
+      text-align: center;
+
+      text-shadow:
+        0 5px 0 rgba(0,0,0,0.08),
+        0 12px 30px rgba(0,0,0,0.15);
+
+      animation: popLogo 1s cubic-bezier(.17,.89,.32,1.49);
+    }
+
+    /* BOTONES */
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 45px;
+      width: 100%;
+      max-width: 420px;
+
+      animation: appear 1s ease 0.35s both;
+    }
+
+    button {
+      flex: 1;
+      border: 2px solid white;
+      background: white;
+      color: #d84fb5;
+
+      padding: 16px 10px;
+      border-radius: 100px;
+
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    button:active {
+      transform: scale(0.94);
+    }
+
+    /* FONDO OSCURO DEL POPUP */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0,0,0,0.45);
+
+      display: none;
+      justify-content: center;
+      align-items: center;
+
+      padding: 25px;
+      z-index: 10;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    /* POPUP */
+
+    .popup {
+      width: 100%;
+      max-width: 380px;
+
+      background: white;
+      border-radius: 28px;
+
+      padding: 35px 25px;
+
+      text-align: center;
+
+      animation: popupIn 0.35s cubic-bezier(.17,.89,.32,1.28);
+    }
+
+    .popup h2 {
+      color: #d84fb5;
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .popup p {
+      color: #333;
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .maps {
+      display: block;
+      text-decoration: none;
+
+      background: #d84fb5;
+      color: white;
+
+      padding: 15px;
+      border-radius: 100px;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      margin-bottom: 10px;
+    }
+
+    .close {
+      background: #f1f1f1;
+      color: #333;
+      border: none;
+      width: 100%;
+    }
+
+    /* ANIMACIONES */
+
+    @keyframes popLogo {
+      0% {
+        opacity: 0;
+        transform: scale(0.2);
+      }
+
+      70% {
+        transform: scale(1.08);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popupIn {
+      from {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <div class="logo">
+      BLASST
+    </div>
+
+    <div class="buttons">
+
+      <button onclick="openLocation()">
+        VER UBICACIÓN
+      </button>
+
+      <button onclick="openMerch()">
+        MERCH
+      </button>
+
+    </div>
+
+  </main>
+
+
+  <!-- POPUP UBICACIÓN -->
+
+  <div class="overlay" id="locationPopup">
+
+    <div class="popup">
+
+      <h2>UBICACIÓN</h2>
+
+      <p>
+        Baños de Agua Santa<br>
+        Ecuador
+      </p>
+
+      <a
+        class="maps"
+        href="https://www.google.com/maps/search/?api=1&query=Baños+de+Agua+Santa,+Ecuador"
+        target="_blank"
+      >
+        ABRIR EN MAPS
+      </a>
+
+      <button class="close" onclick="closePopups()">
+        CERRAR
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- POPUP MERCH -->
+
+  <div class="overlay" id="merchPopup">
+
+    <div class="popup">
+
+      <h2>PRÓXIMAMENTE</h2>
+
+      <button class="close" onclick="closePopups()">
+        CERRAR
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    function openLocation() {
+      document.getElementById("locationPopup").classList.add("active");
+    }
+
+    function openMerch() {
+      document.getElementById("merchPopup").classList.add("active");
+    }
+
+    function closePopups() {
+      document.getElementById("locationPopup").classList.remove("active");
+      document.getElementById("merchPopup").classList.remove("active");
+    }
+
+    /* Cerrar tocando fuera del cuadro */
+
+    document.querySelectorAll(".overlay").forEach(function(overlay) {
+
+      overlay.addEventListener("click", function(event) {
+
+        if (event.target === overlay) {
+          closePopups();
+        }
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
